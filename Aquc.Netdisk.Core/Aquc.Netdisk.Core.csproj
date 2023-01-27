@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>1.0.1.50127</FileVersion>
+    <Authors>aquamarine5</Authors>
+  </PropertyGroup>
+
+</Project>

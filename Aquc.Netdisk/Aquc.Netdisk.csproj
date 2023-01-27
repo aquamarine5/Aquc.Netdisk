@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>0826a29b-b6f3-4431-8d3a-bd51fd2ccdce</UserSecretsId>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Authors>aquamarine5</Authors>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>1.0.1.50127</FileVersion>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+    <PackageReference Include="System.IO.Compression.ZipFile" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Aquc.AquaUpdater\Aquc.AquaUpdater\Aquc.AquaUpdater\Aquc.AquaUpdater.csproj" />
+    <ProjectReference Include="..\Aquc.Netdisk.Bilibili\Aquc.Netdisk.Bilibili.csproj" />
+    <ProjectReference Include="..\Aquc.NetdiskUploader.Aliyunpan\Aquc.Netdisk.Aliyunpan.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Aquc.Netdisk.register.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

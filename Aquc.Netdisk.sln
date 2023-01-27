@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aquc.Netdisk", "Aquc.NetdiskUploader\Aquc.Netdisk.csproj", "{3B9CC3F4-9FC5-440B-86C9-66141E061BCD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aquc.AquaUpdater", "..\Aquc.AquaUpdater\Aquc.AquaUpdater\Aquc.AquaUpdater\Aquc.AquaUpdater.csproj", "{E53F2DBC-0DB2-4D22-8220-4BCA66468941}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aquc.Netdisk.Core", "Aquc.NetdiskUploader.Core\Aquc.Netdisk.Core.csproj", "{D9113124-AEBE-4884-8B97-4BEEBBE8288E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aquc.Netdisk.Aliyunpan", "Aquc.NetdiskUploader.Aliyunpan\Aquc.Netdisk.Aliyunpan.csproj", "{49D5EFA0-2C28-425E-97CA-21226E11C3E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquc.Netdisk.Bilibili", "Aquc.Netdisk.Bilibili\Aquc.Netdisk.Bilibili.csproj", "{4D4F4125-1D56-4BBC-861A-A0EB531AC9A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B9CC3F4-9FC5-440B-86C9-66141E061BCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B9CC3F4-9FC5-440B-86C9-66141E061BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B9CC3F4-9FC5-440B-86C9-66141E061BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B9CC3F4-9FC5-440B-86C9-66141E061BCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E53F2DBC-0DB2-4D22-8220-4BCA66468941}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E53F2DBC-0DB2-4D22-8220-4BCA66468941}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E53F2DBC-0DB2-4D22-8220-4BCA66468941}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E53F2DBC-0DB2-4D22-8220-4BCA66468941}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9113124-AEBE-4884-8B97-4BEEBBE8288E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9113124-AEBE-4884-8B97-4BEEBBE8288E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9113124-AEBE-4884-8B97-4BEEBBE8288E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9113124-AEBE-4884-8B97-4BEEBBE8288E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49D5EFA0-2C28-425E-97CA-21226E11C3E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D5EFA0-2C28-425E-97CA-21226E11C3E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49D5EFA0-2C28-425E-97CA-21226E11C3E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49D5EFA0-2C28-425E-97CA-21226E11C3E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D4F4125-1D56-4BBC-861A-A0EB531AC9A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D4F4125-1D56-4BBC-861A-A0EB531AC9A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D4F4125-1D56-4BBC-861A-A0EB531AC9A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D4F4125-1D56-4BBC-861A-A0EB531AC9A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C79DC48-771E-498A-894F-D92C1056DAF6}
+	EndGlobalSection
+EndGlobal

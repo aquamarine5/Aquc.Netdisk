@@ -1,0 +1,17 @@
+﻿{
+  "": {
+    "args": "748314802178228304",
+    "subscriptionVersion": 4,
+    "lastCheckUpdateTime": "0",
+    "version": "0.1.0",
+    "programDirectory": "D:\\Program Source\\v2\\Aquc.AquaUpdater\\Aquc.AquaUpdater\\debug",
+    "programExtrancePath": "D:\\Program Source\\v2\\Aquc.AquaUpdater\\Aquc.AquaUpdater\\bin\\Debug\\net6.0\\aliyunpan.exe",
+    "programKey": "test",
+    "updateMessageProvider": {
+      "Identity": "bilibilimsgpvder"
+    },
+    "secondUpdateMessageProvider": {
+      "Identity": null
+    }
+  }
+}
