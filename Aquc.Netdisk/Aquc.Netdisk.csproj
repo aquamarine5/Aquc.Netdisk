@@ -8,8 +8,10 @@
     <UserSecretsId>0826a29b-b6f3-4431-8d3a-bd51fd2ccdce</UserSecretsId>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <Authors>aquamarine5</Authors>
-    <AssemblyVersion>1.0.1</AssemblyVersion>
-    <FileVersion>1.0.1.50127</FileVersion>
+    <Company>aquamarine5</Company>
+    <VersionSuffix>beta</VersionSuffix>
+    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <FileVersion>1.0.2.50128</FileVersion>
     <SatelliteResourceLanguages>zh-hans;en-us</SatelliteResourceLanguages>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>

@@ -4,9 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
-    <AssemblyVersion>1.0.1</AssemblyVersion>
-    <FileVersion>1.0.1.50127</FileVersion>
+    <Authors>aquamarine5</Authors>
+    <Company>aquamarine5</Company>
+    <VersionSuffix>beta</VersionSuffix>
+    <AssemblyVersion>1.0.2</AssemblyVersion>
+    <FileVersion>1.0.2.50128</FileVersion>
     
     <Authors>aquamarine5</Authors>
   </PropertyGroup>
