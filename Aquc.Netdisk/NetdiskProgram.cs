@@ -2,25 +2,43 @@
 using Aquc.AquaUpdater.Pvder;
 using Aquc.Netdisk.Aliyunpan;
 using Aquc.Netdisk.Bilibili;
+using Huanent.Logging.File;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 using Microsoft.Win32;
-using Serilog;
 using System.CommandLine;
 using System.IO.Compression;
 
 namespace Aquc.Netdisk;
 
-internal class Program
+internal class NetdiskProgram
 {
     static void Main(string[] args)
     {
-        if(!Directory.Exists(Path.Combine(AppContext.BaseDirectory, "log"))){
-            Directory.CreateDirectory(Path.Combine(AppContext.BaseDirectory, "log"));
-        }
-        using var logger = new LoggerConfiguration()
-            .WriteTo.Console()
-            .WriteTo.File(Path.Combine(AppContext.BaseDirectory, "log", $"{DateTime.Today:yy-MM-dd HH-mm-ss}.log"))
-            .CreateLogger();
-        Log.Logger= logger;
+        using IHost host = Host.CreateDefaultBuilder()
+            .ConfigureLogging(logging =>
+            {
+                logging.ClearProviders();
+                logging.AddSystemdConsole((options) => { options.UseUtcTimestamp = true; });
+                logging.AddFile();
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddSingleton(container => {
+                    var token = BilibiliMsgPvder.Get("221831529");
+                    token.Wait();
+                    return new AliyunpanNetdisk(
+                        new FileInfo(Path.Combine(AppContext.BaseDirectory, "aliyunpan.exe")),
+                        token.Result,
+                        container.GetRequiredService<ILogger<AliyunpanNetdisk>>());
+                });
+            })
+            .Build();
+
+        var _logger = host.Services.GetRequiredService<ILogger<NetdiskProgram>>();
+
         var uploadFileArg = new Argument<string>("file or directory path", parse: (value) =>
         {
             var v = value.Tokens.Single().Value;
@@ -41,13 +59,13 @@ internal class Program
         {
             uploadFileArg
         };
-        var register = new Command("register","Register necessary information to system to make sure it will use currectly.");
+        var register = new Command("register", "Register necessary information to system to make sure it will use currectly.");
         var root = new RootCommand()
         {
             register,
             upload
         };
-        
+
         register.SetHandler(() =>
         {
             var everyRegistry = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Classes")?.OpenSubKey("*");
@@ -58,11 +76,12 @@ internal class Program
                 uploadRegistry.SetValue("", "上传...");
                 var commandRegistry = uploadRegistry.CreateSubKey("command");
                 commandRegistry.SetValue("", $"\"{Environment.ProcessPath}\" upload \"%1\"");
-                Log.Information("Successfully register.");
+                _logger.LogInformation("Successfully register.");
             }
             else
             {
-                Log.Warning("Register failed. RegisterKey is already existed.");
+                _logger.LogWarning("Register failed. RegisterKey is already existed.");
+                return;
             }
             // fix
             var _ = new Launch();
@@ -82,11 +101,10 @@ internal class Program
             var zipPath = Path.Combine(AppContext.BaseDirectory, DateTime.Now.ToString("yy-MM-dd HH-mm-ss")) + ".zip";
             ZipFile.CreateFromDirectory(str, zipPath);
             */
-            new AliyunpanNetdisk(
-                new FileInfo(Path.Combine(AppContext.BaseDirectory, "aliyunpan.exe")),
-                await BilibiliMsgPvder.Get("221831529")).Upload(str, "/upload").Wait();
-            Log.Information("Upload successfully");
+            await host.Services.GetRequiredService<AliyunpanNetdisk>().Upload(str, "/upload");
+            _logger.LogInformation("Upload successfully");
         }, uploadFileArg);
         root.Invoke(args);
+        
     }
 }

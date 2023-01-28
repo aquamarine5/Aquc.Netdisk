@@ -1,6 +1,6 @@
 ﻿using Aquc.Netdisk.Core;
-using Serilog;
-using Serilog.Core;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -8,22 +8,19 @@ using System.Text;
 
 namespace Aquc.Netdisk.Aliyunpan;
 
-public class AliyunpanNetdisk
+public class AliyunpanNetdisk:IHostedService
 {
     bool readyPrintProgress = false;
     TaskCompletionSource<string>? _taskHandler;
-    Logger _logger;
+    readonly ILogger<AliyunpanNetdisk> _logger;
 
     readonly FileInfo aliyunpanFile;
     public readonly string token;
-    public AliyunpanNetdisk(FileInfo aliyunpanInit, string token)
+    public AliyunpanNetdisk(FileInfo aliyunpanInit, string token,ILogger<AliyunpanNetdisk> logger)
     {
         aliyunpanFile=aliyunpanInit;
         this.token= token;
-        _logger = new LoggerConfiguration()
-            .WriteTo.Console()
-            .WriteTo.File(Path.Combine(AppContext.BaseDirectory, "log", $"{DateTime.Today:yy-MM-dd HH-mm-ss}.log"))
-            .CreateLogger();
+        _logger = logger;
     }
 
     public async Task Upload(string filepath,string toDirectory)
@@ -69,11 +66,12 @@ public class AliyunpanNetdisk
         {
             throw new InvalidDataException(result);
         }
-        _logger.Information("Aliyunpan login.");
+        _logger.LogInformation("Aliyunpan login.");
     }
     public async Task<bool> IsLogged()
     {
-        return (await RunExecAsync("loglist")).Contains(token);
+        // TODO
+        return (await RunExecAsync("loglist")).Contains("1");
     }
     protected async Task<string> RunExecAsync(string args)
     {
@@ -90,7 +88,7 @@ public class AliyunpanNetdisk
         };
         process.Start();
         await process.WaitForExitAsync();
-        _logger.Information($"run {args}");
+        _logger.LogInformation($"run {args}");
         return process.StandardOutput.ReadToEnd();
     }
     protected void RunExecIter(string args,DataReceivedEventHandler dataReceivedEventHandler,EventHandler exitEventHandler)
@@ -112,7 +110,17 @@ public class AliyunpanNetdisk
         process.Start();
         process.BeginOutputReadLine();
         process.WaitForExit();
-        _logger.Information($"run {args}");
+        _logger.LogInformation($"run {args}");
         process.Dispose();
+    }
+
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
     }
 }

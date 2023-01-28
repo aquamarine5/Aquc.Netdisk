@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aquc.NetdiskUploader.Core\Aquc.Netdisk.Core.csproj" />
+    <ProjectReference Include="..\Aquc.Netdisk.Core\Aquc.Netdisk.Core.csproj" />
   </ItemGroup>
 
 </Project>

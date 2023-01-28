@@ -11,12 +11,12 @@
     <Authors>aquamarine5</Authors>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
-    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Aquc.NetdiskUploader.Core\Aquc.Netdisk.Core.csproj" />
+    <ProjectReference Include="..\Aquc.Netdisk.Core\Aquc.Netdisk.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
