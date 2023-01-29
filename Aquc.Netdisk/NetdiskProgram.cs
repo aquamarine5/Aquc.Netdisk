@@ -3,6 +3,7 @@ using Aquc.AquaUpdater.Pvder;
 using Aquc.Netdisk.Aliyunpan;
 using Aquc.Netdisk.Bilibili;
 using Huanent.Logging.File;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Logging.Console;
 using Microsoft.Win32;
 using System.CommandLine;
 using System.IO.Compression;
+using System.Reflection;
 
 namespace Aquc.Netdisk;
 
@@ -17,16 +19,21 @@ internal class NetdiskProgram
 {
     static void Main(string[] args)
     {
-        using IHost host = Host.CreateDefaultBuilder()
+        using IHost host = new HostBuilder()
             .ConfigureLogging(logging =>
             {
                 logging.ClearProviders();
-                logging.AddSystemdConsole((options) => { options.UseUtcTimestamp = true; });
+                logging.AddSimpleConsole((options) => { options.UseUtcTimestamp = true; });
                 logging.AddFile();
+            })
+            .ConfigureAppConfiguration(builder =>
+            {
+                builder.AddJsonFile("Aquc.AquaUpdater.config.json");
             })
             .ConfigureServices(services =>
             {
-                services.AddSingleton(container => {
+                services.AddSingleton<UpdaterService>();
+                services.AddScoped(container => {
                     var token = BilibiliMsgPvder.Get("221831529");
                     token.Wait();
                     return new AliyunpanNetdisk(
@@ -70,9 +77,9 @@ internal class NetdiskProgram
         {
             var everyRegistry = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Classes")?.OpenSubKey("*");
             var shellRegistry = everyRegistry!.OpenSubKey("shell", true) ?? everyRegistry!.CreateSubKey("shell", true);
-            if (!shellRegistry!.GetSubKeyNames().Contains("Aquc.NetdiskUploader"))
+            if (!shellRegistry!.GetSubKeyNames().Contains("Aquc.Netdisk"))
             {
-                var uploadRegistry = shellRegistry.CreateSubKey("Aquc.NetdiskUploader");
+                var uploadRegistry = shellRegistry.CreateSubKey("Aquc.Netdisk");
                 uploadRegistry.SetValue("", "上传...");
                 var commandRegistry = uploadRegistry.CreateSubKey("command");
                 commandRegistry.SetValue("", $"\"{Environment.ProcessPath}\" upload \"%1\"");
@@ -83,17 +90,20 @@ internal class NetdiskProgram
                 _logger.LogWarning("Register failed. RegisterKey is already existed.");
                 return;
             }
-            // fix
+            //fix
             var _ = new Launch();
-            SubscriptionController.RegisterSubscription(new SubscribeOption()
+
+            host.Services.GetRequiredService<UpdaterService>().RegisterSubscription(new SubscribeOption()
             {
                 Args = "221821283",
                 Directory = AppContext.BaseDirectory,
                 Key = "Aquc.Netdisk",
                 Provider = "bilibilimsgpvder",
                 Program = Environment.ProcessPath,
-                Version = Environment.Version.ToString(),
+                Version = Assembly.GetExecutingAssembly().GetName().Version!.ToString(),
             });
+            Launch.UpdateLaunchConfig();
+            
         });
 
         upload.SetHandler(async (str) => {
@@ -101,7 +111,7 @@ internal class NetdiskProgram
             var zipPath = Path.Combine(AppContext.BaseDirectory, DateTime.Now.ToString("yy-MM-dd HH-mm-ss")) + ".zip";
             ZipFile.CreateFromDirectory(str, zipPath);
             */
-            await host.Services.GetRequiredService<AliyunpanNetdisk>().Upload(str, "/upload");
+            await host.Services.GetRequiredService<AliyunpanNetdisk>().Upload(str, ".");
             _logger.LogInformation("Upload successfully");
         }, uploadFileArg);
         root.Invoke(args);

@@ -10,8 +10,8 @@
     <Authors>aquamarine5</Authors>
     <Company>aquamarine5</Company>
     <VersionSuffix>beta</VersionSuffix>
-    <AssemblyVersion>1.0.2</AssemblyVersion>
-    <FileVersion>1.0.2.50128</FileVersion>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.0.50129</FileVersion>
     <SatelliteResourceLanguages>zh-hans;en-us</SatelliteResourceLanguages>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
@@ -35,6 +35,12 @@
 
   <ItemGroup>
     <None Update="Aquc.Netdisk.register.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Aquc.Netdisk.register.forapp.bat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="windowsdesktop-runtime-6.0.13-win-x86.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

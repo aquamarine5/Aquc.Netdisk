@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,12 +8,8 @@
     <Authors>aquamarine5</Authors>
     <Company>aquamarine5</Company>
     <VersionSuffix>beta</VersionSuffix>
-    <AssemblyVersion>1.0.2</AssemblyVersion>
-    <FileVersion>1.0.2.50128</FileVersion>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.0.50129</FileVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Aquc.Netdisk.Core\Aquc.Netdisk.Core.csproj" />
-  </ItemGroup>
 
 </Project>
