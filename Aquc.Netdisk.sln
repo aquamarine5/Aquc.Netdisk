@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aquc.Netdisk.Aliyunpan", "A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aquc.Netdisk.Bilibili", "Aquc.Netdisk.Bilibili\Aquc.Netdisk.Bilibili.csproj", "{4D4F4125-1D56-4BBC-861A-A0EB531AC9A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquc.AquaUpdaterTests1", "..\Aquc.AquaUpdater\Aquc.AquaUpdater\Aquc.AquaUpdaterTests1\Aquc.AquaUpdaterTests1.csproj", "{2E2E283A-20B9-4DFE-AC77-A83047A5FBFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquc.Netdisk.Huang1111", "Aquc.Netdisk.Huang1111\Aquc.Netdisk.Huang1111.csproj", "{5531FDBF-54CB-45C3-818E-F7C56E063A0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{4D4F4125-1D56-4BBC-861A-A0EB531AC9A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D4F4125-1D56-4BBC-861A-A0EB531AC9A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D4F4125-1D56-4BBC-861A-A0EB531AC9A0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2E2E283A-20B9-4DFE-AC77-A83047A5FBFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E2E283A-20B9-4DFE-AC77-A83047A5FBFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2E2E283A-20B9-4DFE-AC77-A83047A5FBFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E2E283A-20B9-4DFE-AC77-A83047A5FBFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5531FDBF-54CB-45C3-818E-F7C56E063A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5531FDBF-54CB-45C3-818E-F7C56E063A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5531FDBF-54CB-45C3-818E-F7C56E063A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5531FDBF-54CB-45C3-818E-F7C56E063A0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

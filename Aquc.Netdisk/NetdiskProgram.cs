@@ -26,6 +26,7 @@ internal class NetdiskProgram
                 logging.AddSimpleConsole((options) => { options.UseUtcTimestamp = true; });
                 logging.AddFile();
             })
+            
             .ConfigureAppConfiguration(builder =>
             {
                 builder.AddJsonFile("Aquc.AquaUpdater.config.json");
@@ -43,7 +44,6 @@ internal class NetdiskProgram
                 });
             })
             .Build();
-
         var _logger = host.Services.GetRequiredService<ILogger<NetdiskProgram>>();
 
         var uploadFileArg = new Argument<string>("file or directory path", parse: (value) =>
