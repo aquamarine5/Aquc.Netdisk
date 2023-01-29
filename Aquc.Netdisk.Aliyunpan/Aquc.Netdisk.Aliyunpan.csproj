@@ -1,22 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
-    <AssemblyVersion>1.0.1</AssemblyVersion>
-    <FileVersion>1.0.1.50127</FileVersion>
+    <Authors>aquamarine5</Authors>
+    <Company>aquamarine5</Company>
+    <VersionSuffix>beta</VersionSuffix>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.0.50129</FileVersion>
     
     <Authors>aquamarine5</Authors>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
-    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Aquc.NetdiskUploader.Core\Aquc.Netdisk.Core.csproj" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

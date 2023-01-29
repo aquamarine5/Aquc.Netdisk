@@ -1,6 +1,5 @@
-﻿using Aquc.Netdisk.Core;
-using Serilog;
-using Serilog.Core;
+﻿using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -8,36 +7,34 @@ using System.Text;
 
 namespace Aquc.Netdisk.Aliyunpan;
 
-public class AliyunpanNetdisk
+public class AliyunpanNetdisk:IHostedService
 {
     bool readyPrintProgress = false;
     TaskCompletionSource<string>? _taskHandler;
-    Logger _logger;
+    readonly ILogger<AliyunpanNetdisk> _logger;
 
     readonly FileInfo aliyunpanFile;
     public readonly string token;
-    public AliyunpanNetdisk(FileInfo aliyunpanInit, string token)
+    public AliyunpanNetdisk(FileInfo aliyunpanInit, string token,ILogger<AliyunpanNetdisk> logger)
     {
         aliyunpanFile=aliyunpanInit;
         this.token= token;
-        _logger = new LoggerConfiguration()
-            .WriteTo.Console()
-            .WriteTo.File(Path.Combine(AppContext.BaseDirectory, "log", $"{DateTime.Today:yy-MM-dd HH-mm-ss}.log"))
-            .CreateLogger();
+        _logger = logger;
     }
 
     public async Task Upload(string filepath,string toDirectory)
     {
         await LoginWhenNLI();
-        await RunExecAsync($"upload -ow \"{filepath}\" \"{toDirectory}\"");
+        await RunExecAsync($"upload \"{filepath}\" \"{toDirectory}\" --ow ");
 
     }
     public async Task<string> Download(string filePath,DirectoryInfo targetDirectory,bool printProgress=true)
     {
         await LoginWhenNLI();
         _taskHandler = new TaskCompletionSource<string>();
-        
-        RunExecIter($"download -ow \"{filePath}\" --saveto \"{targetDirectory.FullName}\"",
+        var t = targetDirectory.FullName;
+        if (t.EndsWith("\\")) t=t[..^1];
+        RunExecIter($"download \"{filePath}\" --ow --saveto \"{t}\"",
             (sender, args) =>
             {
                 if (string.IsNullOrEmpty(args.Data)) return;
@@ -46,7 +43,7 @@ public class AliyunpanNetdisk
                 if (args.Data.Contains("下载开始") && printProgress)
                     readyPrintProgress = true;
                 if (readyPrintProgress)
-                    Console.WriteLine(args.Data);
+                    _logger.LogInformation("{data}",args.Data);
             },
             (sender, args) =>
             {
@@ -67,13 +64,14 @@ public class AliyunpanNetdisk
         var result = await RunExecAsync($"login -RefreshToken {token}");
         if (result.Contains("登录失败"))
         {
+            _logger.LogError("Failed to login aliyunpan. {response}", result);
             throw new InvalidDataException(result);
         }
-        _logger.Information("Aliyunpan login.");
+        _logger.LogInformation("Aliyunpan login successfully.");
     }
     public async Task<bool> IsLogged()
     {
-        return (await RunExecAsync("loglist")).Contains(token);
+        return (await RunExecAsync("loglist")).AsEnumerable().Count(c=>c=='\n')>2;
     }
     protected async Task<string> RunExecAsync(string args)
     {
@@ -89,8 +87,9 @@ public class AliyunpanNetdisk
             }
         };
         process.Start();
+        _logger.LogInformation("Do aliyunpan interaction start: aliyunpan.exe {args}", args);
         await process.WaitForExitAsync();
-        _logger.Information($"run {args}");
+        _logger.LogInformation("Do aliyunpan interaction finish: aliyunpan.exe {args}",args);
         return process.StandardOutput.ReadToEnd();
     }
     protected void RunExecIter(string args,DataReceivedEventHandler dataReceivedEventHandler,EventHandler exitEventHandler)
@@ -110,9 +109,20 @@ public class AliyunpanNetdisk
         process.OutputDataReceived += dataReceivedEventHandler;
         process.Exited += exitEventHandler;
         process.Start();
+        _logger.LogInformation("Do aliyunpan iter interaction start: aliyunpan.exe {args}", args);
         process.BeginOutputReadLine();
         process.WaitForExit();
-        _logger.Information($"run {args}");
+        _logger.LogInformation("Do aliyunpan iter interaction finish: aliyunpan.exe {args}", args);
         process.Dispose();
+    }
+
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
     }
 }
