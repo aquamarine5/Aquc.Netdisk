@@ -93,7 +93,9 @@ internal class NetdiskProgram
             //fix
             var _ = new Launch();
 
-            host.Services.GetRequiredService<UpdaterService>().RegisterSubscription(new SubscribeOption()
+            var update = host.Services.GetRequiredService<UpdaterService>();
+            update.RegisterScheduleTasks();
+            update.RegisterSubscription(new SubscribeOption()
             {
                 Args = "221821283",
                 Directory = AppContext.BaseDirectory,
