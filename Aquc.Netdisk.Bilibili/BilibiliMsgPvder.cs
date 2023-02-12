@@ -20,8 +20,8 @@ namespace Aquc.Netdisk.Bilibili
                 !["data"]!["card"]!["card"]!.ToString())
                 !["item"]!["content"]!.ToString();
             */
-            //Console.WriteLine($"https://api.vc.bilibili.com/x/v2/reply/main?jsonp=jsonp&next=0&type=17&mode=3&plat=1&oid={id}");
-            var response = await http.GetAsync($"https://api.bilibili.com/x/v2/reply/main?jsonp=jsonp&next=0&type=11&oid={id}&mode=3&plat=1");
+            //Console.WriteLine($"https://api.vc.bilibili.com/x/v2/reply/main?jsonp=jsonp&next=0&type=17&mode=2&plat=1&oid={id}");
+            var response = await http.GetAsync($"https://api.bilibili.com/x/v2/reply/main?jsonp=jsonp&next=0&type=11&oid={id}&mode=2&plat=1");
             var replies = JsonNode.Parse(await response.EnsureSuccessStatusCode().Content.ReadAsStringAsync())!["data"]!["replies"]!.AsArray();
             http.Dispose();
             if (replies.Count > index)

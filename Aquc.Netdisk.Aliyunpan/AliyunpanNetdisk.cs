@@ -25,7 +25,7 @@ public class AliyunpanNetdisk:IHostedService
     public async Task Upload(string filepath,string toDirectory)
     {
         await LoginWhenNLI();
-        await RunExecAsync($"upload \"{filepath}\" \"{toDirectory}\" --ow ");
+        _logger.LogInformation("from aliyunpan.exe: \n{}",await RunExecAsync($"upload \"{filepath}\" \"{toDirectory}\" --ow "));
 
     }
     public async Task<string> Download(string filePath,DirectoryInfo targetDirectory,bool printProgress=true)

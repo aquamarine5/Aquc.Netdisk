@@ -6,11 +6,11 @@
     <Nullable>enable</Nullable>
     <Authors>aquamarine5</Authors>
     <Company>aquamarine5</Company>
-    <VersionSuffix>beta</VersionSuffix>
-    <Version>1.2.0</Version>
-    <AssemblyVersion>1.2.0</AssemblyVersion>
-    <FileVersion>1.2.0.50130</FileVersion>
-    
+    <Version>1.4.0</Version>
+    <AssemblyVersion>1.4.0</AssemblyVersion>
+    <FileVersion>1.4.0.2211</FileVersion>
+
+    <BaseOutputPath>D:\Program Source\Aquacore</BaseOutputPath>
     <Authors>aquamarine5</Authors>
   </PropertyGroup>
   <ItemGroup>
