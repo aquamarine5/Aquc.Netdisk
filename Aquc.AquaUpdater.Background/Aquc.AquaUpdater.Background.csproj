@@ -6,6 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <BaseOutputPath>bin</BaseOutputPath>
+    <PublishSingleFile Condition="'$(Configuration)' == 'Release' ">true</PublishSingleFile>
+    <DebugType>embedded</DebugType>
   
     <Authors>aquamarine5</Authors>
     <Company>aquamarine5</Company>

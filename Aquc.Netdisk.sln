@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aquc.Netdisk.Smms", "Aquc.N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aquc.Configuration", "..\Aquc.Configuration\Aquc.Configuration\Aquc.Configuration.csproj", "{3B132E49-8BEE-47D5-965D-4410DE7F4561}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquc.AquaUpdater.Background", "Aquc.AquaUpdater.Background\Aquc.AquaUpdater.Background.csproj", "{2483B2F4-7B03-478B-964A-5055E50031AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Aquc.AquaUpdater.Background", "Aquc.AquaUpdater.Background\Aquc.AquaUpdater.Background.csproj", "{2483B2F4-7B03-478B-964A-5055E50031AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquc.Netdisk.Mail", "Aquc.Netdisk.Mail\Aquc.Netdisk.Mail.csproj", "{30F717EA-BC16-43C5-BB1F-6DF611CDBDE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{2483B2F4-7B03-478B-964A-5055E50031AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2483B2F4-7B03-478B-964A-5055E50031AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2483B2F4-7B03-478B-964A-5055E50031AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30F717EA-BC16-43C5-BB1F-6DF611CDBDE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30F717EA-BC16-43C5-BB1F-6DF611CDBDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30F717EA-BC16-43C5-BB1F-6DF611CDBDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30F717EA-BC16-43C5-BB1F-6DF611CDBDE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
