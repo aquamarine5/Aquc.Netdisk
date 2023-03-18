@@ -17,7 +17,7 @@ namespace Aquc.Netdisk;
 
 internal class NetdiskProgram
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         using IHost host = new HostBuilder()
             .ConfigureLogging(logging =>
@@ -76,7 +76,7 @@ internal class NetdiskProgram
             upload
         };
 
-        register.SetHandler(() =>
+        register.SetHandler(async () =>
         {
             var everyRegistry = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Classes")?.OpenSubKey("*");
             var dReg= Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Classes")?.OpenSubKey("Directory");
@@ -105,7 +105,7 @@ internal class NetdiskProgram
             var _ = new Launch();
 
             var update = host.Services.GetRequiredService<UpdaterService>();
-            update.RegisterScheduleTasks();
+            await update.RegisterScheduleTasks();
             update.RegisterSubscription(new SubscribeOption()
             {
                 Args = "221821283",
@@ -138,7 +138,7 @@ internal class NetdiskProgram
 
             _logger.LogInformation("Upload successfully");
         }, uploadFileArg);
-        root.Invoke(args);
+        await root.InvokeAsync(args);
         
     }
 }

@@ -21,16 +21,30 @@ public class AliyunpanNetdisk:IHostedService
         this.token= token;
         _logger = logger;
     }
-
+    public async Task RegisterUpdateTokenSchtask()
+    {
+        using var process = new Process()
+        {
+            StartInfo = new ProcessStartInfo()
+            {
+                FileName = "schtasks",
+                Arguments = $"/Create /F /SC weekly /D MON /TR \"'{aliyunpanFile.FullName + "' token update -mode 2"}\" /TN \"Aquacore\\Aquc.AquaUpdater.Aliyunpan.UpdateToken\"",
+                CreateNoWindow = true
+            }
+        };
+        process.Start();
+        await process.WaitForExitAsync();
+        _logger.LogInformation("Success schedule aliyunpan-token-update");
+    }
     public async Task Upload(string filepath,string toDirectory)
     {
-        await LoginWhenNLI();
+        await LoginWhenLogout();
         _logger.LogInformation("from aliyunpan.exe: \n{}",await RunExecAsync($"upload \"{filepath}\" \"{toDirectory}\" --ow "));
 
     }
     public async Task<string> Download(string filePath,DirectoryInfo targetDirectory,bool printProgress=true)
     {
-        await LoginWhenNLI();
+        await LoginWhenLogout();
         _taskHandler = new TaskCompletionSource<string>();
         var t = targetDirectory.FullName;
         if (t.EndsWith("\\")) t=t[..^1];
@@ -52,7 +66,7 @@ public class AliyunpanNetdisk:IHostedService
             });
         return await _taskHandler.Task;
     }
-    public async Task LoginWhenNLI()
+    public async Task LoginWhenLogout()
     {
         if (!await IsLogged())
         {

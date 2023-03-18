@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows7.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UserSecretsId>0826a29b-b6f3-4431-8d3a-bd51fd2ccdce</UserSecretsId>
@@ -16,7 +16,6 @@
 
     <BaseOutputPath>D:\Program Source\Aquacore</BaseOutputPath>
     <SatelliteResourceLanguages>zh-hans;en-us</SatelliteResourceLanguages>
-    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,12 +33,6 @@
     <ProjectReference Include="..\..\Aquc.AquaUpdater\Aquc.AquaUpdater\Aquc.AquaUpdater\Aquc.AquaUpdater.csproj" />
     <ProjectReference Include="..\Aquc.Netdisk.Bilibili\Aquc.Netdisk.Bilibili.csproj" />
     <ProjectReference Include="..\Aquc.Netdisk.Aliyunpan\Aquc.Netdisk.Aliyunpan.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Aquc.Netdisk.register.forapp.bat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

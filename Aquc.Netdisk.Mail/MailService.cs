@@ -4,13 +4,13 @@ using System.Net.Mail;
 
 namespace Aquc.Netdisk.Mail
 {
-    public class Mail
+    public class MailService
     {
-        private readonly ILogger<Mail> _logger;
+        private readonly ILogger<MailService> _logger;
         public readonly string mail;
         private readonly string key;
         private readonly SmtpClient _smtpClient;
-        public Mail(ILogger<Mail> logger, string mail, string key,string host)
+        public MailService(ILogger<MailService> logger, string mail, string key,string host)
         {
             (_logger, this.mail, this.key) = (logger, mail, key);
             _smtpClient = new SmtpClient
@@ -21,11 +21,11 @@ namespace Aquc.Netdisk.Mail
             };
         }
             
-        public void Send(MailMessage mailMessage)
+        public async Task Send(MailMessage mailMessage)
         {
             try
             {
-                _smtpClient.Send(mailMessage);
+                await _smtpClient.SendMailAsync(mailMessage);
                 _logger.LogDebug("Success send mail to {m}", string.Join(", ", mailMessage.To));
             }
             catch(SmtpException e) 

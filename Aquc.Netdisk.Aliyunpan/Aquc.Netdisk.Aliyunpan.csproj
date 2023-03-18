@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Authors>aquamarine5</Authors>
@@ -10,6 +10,7 @@
     <AssemblyVersion>1.4.0</AssemblyVersion>
     <FileVersion>1.4.0.2211</FileVersion>
 
+    <SatelliteResourceLanguages>zh-hans;en-us</SatelliteResourceLanguages>
     <BaseOutputPath>D:\Program Source\Aquacore</BaseOutputPath>
     <Authors>aquamarine5</Authors>
   </PropertyGroup>
