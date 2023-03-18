@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
 
     <VersionSuffix>beta</VersionSuffix>
+    <DebugType>embedded</DebugType>
     <Authors>aquamarine5</Authors>
     <Company>aquamarine5</Company>
     <Version>1.4.0</Version>

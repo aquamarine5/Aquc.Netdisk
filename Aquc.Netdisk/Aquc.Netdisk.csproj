@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <DebugType>embedded</DebugType>
     <UserSecretsId>0826a29b-b6f3-4431-8d3a-bd51fd2ccdce</UserSecretsId>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <Authors>aquamarine5</Authors>

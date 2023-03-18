@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DebugType>embedded</DebugType>
     <Nullable>enable</Nullable>
     <BaseOutputPath>D:\Program Source\Aquacore</BaseOutputPath>
   </PropertyGroup>
