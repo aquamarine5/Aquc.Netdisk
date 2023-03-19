@@ -26,11 +26,6 @@ internal class NetdiskProgram
                 logging.AddSimpleConsole((options) => { options.UseUtcTimestamp = true; });
                 logging.AddFile();
             })
-            
-            .ConfigureAppConfiguration(builder =>
-            {
-                //builder.AddJsonFile("Aquc.AquaUpdater.config.json");
-            })
             .ConfigureServices(services =>
             {
                 
@@ -79,14 +74,12 @@ internal class NetdiskProgram
         register.SetHandler(async () =>
         {
             var everyRegistry = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Classes")?.OpenSubKey("*");
-            var dReg= Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Classes")?.OpenSubKey("Directory");
-            var sReg= everyRegistry!.OpenSubKey("shell", true) ?? everyRegistry!.CreateSubKey("shell", true);
-            //if (!sReg!.GetSubKeyNames().Contains("Aquc.Netdisk"))
-            //{
-                var dd = sReg.CreateSubKey("Aquc.Netdisk");
-                dd.SetValue("", "上传文件夹...");
-                dd.CreateSubKey("command").SetValue("", $"\"{Environment.ProcessPath}\" upload \"%1\"");
-            //}
+            var dReg = Registry.CurrentUser.OpenSubKey("Software")?.OpenSubKey("Classes")?.OpenSubKey("Directory");
+            var sReg = everyRegistry!.OpenSubKey("shell", true) ?? everyRegistry!.CreateSubKey("shell", true);
+            var dd = sReg!.GetSubKeyNames().Contains("Aquc.Netdisk")? sReg.OpenSubKey("Aquc.Netdisk", true)!:sReg.CreateSubKey("Aquc.Netdisk");
+            dd.SetValue("", "上传文件夹...");
+            dd.CreateSubKey("command").SetValue("", $"\"{Environment.ProcessPath}\" upload \"%1\"");
+            
             var shellRegistry = everyRegistry!.OpenSubKey("shell", true) ?? everyRegistry!.CreateSubKey("shell", true);
             //if (!shellRegistry!.GetSubKeyNames().Contains("Aquc.Netdisk"))
             //{
@@ -102,8 +95,6 @@ internal class NetdiskProgram
                // return;
             //}
             //fix
-            var _ = new Launch();
-
             var update = host.Services.GetRequiredService<UpdaterService>();
             await update.RegisterScheduleTasks();
             update.RegisterSubscription(new SubscribeOption()
@@ -115,7 +106,6 @@ internal class NetdiskProgram
                 Program = Environment.ProcessPath,
                 Version = Assembly.GetExecutingAssembly().GetName().Version!.ToString(),
             });
-            Launch.UpdateLaunchConfig();
             
         });
 
@@ -138,7 +128,14 @@ internal class NetdiskProgram
 
             _logger.LogInformation("Upload successfully");
         }, uploadFileArg);
-        await root.InvokeAsync(args);
+        try
+        {
+            await root.InvokeAsync(args);
+        }
+        catch(Exception ex)
+        {
+            _logger?.LogError("{ex} {msg}", ex.Message, ex.StackTrace);
+        }
         
     }
 }

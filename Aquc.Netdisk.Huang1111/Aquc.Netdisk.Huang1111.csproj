@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <Authors>aquamarine5</Authors>
     <Company>aquamarine5</Company>
+    <BaseOutputPath>D:\Program Source\Aquacore</BaseOutputPath>
     <Version>1.4.0</Version>
     <DebugType>embedded</DebugType>
     <AssemblyVersion>1.4.0</AssemblyVersion>
